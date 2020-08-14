@@ -1,11 +1,11 @@
-package com.example.native_new.android.androidbasejava.data.db;
+package com.example.native_new.android.androidbasejava.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.native_new.android.androidbasejava.data.model.Pokemon;
+import com.example.native_new.android.androidbasejava.model.Pokemon;
 
 import java.util.List;
 

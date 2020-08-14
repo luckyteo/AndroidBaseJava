@@ -1,48 +1,30 @@
 package com.example.native_new.android.androidbasejava.repository;
 
-import androidx.lifecycle.LiveData;
-
-import com.example.native_new.android.androidbasejava.data.api.PokeApiService;
-import com.example.native_new.android.androidbasejava.data.db.PokeDao;
-import com.example.native_new.android.androidbasejava.data.model.Pokemon;
-import com.example.native_new.android.androidbasejava.data.model.PokemonResponse;
+import com.example.native_new.android.androidbasejava.api.ApiService;
+import com.example.native_new.android.androidbasejava.db.PokeDao;
+import com.example.native_new.android.androidbasejava.model.Books;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class Repository {
-    private PokeDao pokeDao;
+    @Inject
+    PokeDao pokeDao;
+    @Inject
+    ApiService apiService;
 
     @Inject
-    PokeApiService apiService;
-
-    @Inject
-    public Repository(PokeDao pokeDao, PokeApiService apiService) {
-        this.pokeDao = pokeDao;
-        this.apiService = apiService;
+    public Repository() {
+        // nothing impl
     }
 
-
-    public Observable<PokemonResponse> getPokemons(){
-        return apiService.getPokemons();
-    }
-
-    public void insertPokemon(Pokemon pokemon){
-        pokeDao.insertPokemon(pokemon);
-    }
-
-    public void deletePokemon(String pokemonName){
-        pokeDao.deletePokemon(pokemonName);
-    }
-
-    public void deleteAll(){
-        pokeDao.deleteAll();
-    }
-
-    public LiveData<List<Pokemon>> getFavoritePokemon(){
-        return pokeDao.getFavoritePokemons();
+    public Observable<List<Books>> getBooks() {
+        return apiService.getBooks().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

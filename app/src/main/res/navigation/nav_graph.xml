@@ -18,5 +18,5 @@
         android:id="@+id/fragmentDetail"
         android:name="com.example.native_new.android.androidbasejava.ui.detail.FragmentDetail"
         android:label="fragment_detail_fragment"
-        tools:layout="@layout/fragment_detail_fragment" />
+        tools:layout="@layout/detail_fragment" />
 </navigation>

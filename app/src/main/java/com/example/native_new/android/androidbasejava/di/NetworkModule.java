@@ -1,7 +1,7 @@
 package com.example.native_new.android.androidbasejava.di;
 
 import com.example.native_new.android.androidbasejava.BuildConfig;
-import com.example.native_new.android.androidbasejava.data.api.ApiService;
+import com.example.native_new.android.androidbasejava.api.ApiService;
 
 import javax.inject.Singleton;
 
@@ -18,6 +18,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 @InstallIn(ApplicationComponent.class)
 public class NetworkModule {
+
+    private NetworkModule(){
+        // nothing
+    }
 
     @Provides
     @Singleton
@@ -37,6 +41,7 @@ public class NetworkModule {
     @Singleton
     public static ApiService apiService(OkHttpClient client) {
         return new Retrofit.Builder()
+                .client(client)
                 .baseUrl("https://5f34fc1d9124200016e193af.mockapi.io/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())

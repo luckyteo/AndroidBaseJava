@@ -1,4 +1,4 @@
-package com.example.native_new.android.androidbasejava.data.model;
+package com.example.native_new.android.androidbasejava.model;
 
 import java.util.ArrayList;
 

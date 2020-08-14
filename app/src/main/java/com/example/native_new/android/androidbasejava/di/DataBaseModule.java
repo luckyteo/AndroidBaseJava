@@ -4,8 +4,8 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import com.example.native_new.android.androidbasejava.data.db.PokeDao;
-import com.example.native_new.android.androidbasejava.data.db.PokemonDB;
+import com.example.native_new.android.androidbasejava.db.PokeDao;
+import com.example.native_new.android.androidbasejava.db.PokemonDB;
 
 import javax.inject.Singleton;
 
@@ -17,7 +17,9 @@ import dagger.hilt.android.components.ApplicationComponent;
 @Module
 @InstallIn(ApplicationComponent.class)
 public class DataBaseModule {
-
+    private DataBaseModule(){
+        // nothing
+    }
     @Provides
     @Singleton
     public static PokemonDB providePokemonDB(Application application){
