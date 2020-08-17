@@ -17,13 +17,14 @@ import dagger.hilt.android.components.ApplicationComponent;
 @Module
 @InstallIn(ApplicationComponent.class)
 public class DataBaseModule {
-    private DataBaseModule(){
+    private DataBaseModule() {
         // nothing
     }
+
     @Provides
     @Singleton
-    public static PokemonDB providePokemonDB(Application application){
-        return Room.databaseBuilder(application,PokemonDB.class,"Favorite Database")
+    public static PokemonDB providePokemonDB(Application application) {
+        return Room.databaseBuilder(application, PokemonDB.class, "Favorite Database")
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
@@ -31,7 +32,7 @@ public class DataBaseModule {
 
     @Provides
     @Singleton
-    public static PokeDao providePokeDao(PokemonDB pokemonDB){
+    public static PokeDao providePokeDao(PokemonDB pokemonDB) {
         return pokemonDB.pokeDao();
     }
 }

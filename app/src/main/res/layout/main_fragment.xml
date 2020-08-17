@@ -15,10 +15,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/pokemonRecyclerView"/>
         <Button
             android:id="@+id/goto_detail"
             android:layout_width="wrap_content"

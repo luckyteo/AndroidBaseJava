@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class PokemonResponse {
     private Integer count;
-    private String next,previous;
+    private String next, previous;
     private ArrayList<Pokemon> results;
 
     public PokemonResponse(Integer count, String next, String previous, ArrayList<Pokemon> results) {
