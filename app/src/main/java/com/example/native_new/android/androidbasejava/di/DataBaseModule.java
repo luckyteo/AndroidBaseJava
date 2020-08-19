@@ -4,8 +4,8 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import com.example.native_new.android.androidbasejava.db.PokeDao;
-import com.example.native_new.android.androidbasejava.db.PokemonDB;
+import com.example.native_new.android.androidbasejava.db.AppDB;
+import com.example.native_new.android.androidbasejava.db.BooksDao;
 
 import javax.inject.Singleton;
 
@@ -17,13 +17,14 @@ import dagger.hilt.android.components.ApplicationComponent;
 @Module
 @InstallIn(ApplicationComponent.class)
 public class DataBaseModule {
-    private DataBaseModule(){
+    private DataBaseModule() {
         // nothing
     }
+
     @Provides
     @Singleton
-    public static PokemonDB providePokemonDB(Application application){
-        return Room.databaseBuilder(application,PokemonDB.class,"Favorite Database")
+    public static AppDB providePokemonDB(Application application) {
+        return Room.databaseBuilder(application, AppDB.class, "HQ.sqlite")
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
@@ -31,7 +32,7 @@ public class DataBaseModule {
 
     @Provides
     @Singleton
-    public static PokeDao providePokeDao(PokemonDB pokemonDB){
-        return pokemonDB.pokeDao();
+    public static BooksDao provideBooksDao(AppDB appDB) {
+        return appDB.getBooksDao();
     }
 }

@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(ApplicationComponent.class)
 public class NetworkModule {
 
-    private NetworkModule(){
+    private NetworkModule() {
         // nothing
     }
 

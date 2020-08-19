@@ -13,8 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.native_new.android.androidbasejava.utils.logs.LogTag;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Objects;
@@ -33,11 +31,17 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
 
     protected abstract void subscribeUi();
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = getViewModel();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        LogTag.i("BaseFragment onCreateView");
+//        LogTag.i("BaseFragment onCreateView");
         View root = inflater.inflate(getResourceLayoutId(), container, false);
         binding = DataBindingUtil.bind(root);
         onInitView(root);
@@ -46,9 +50,8 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        LogTag.i("BaseFragment onViewCreate");
+//        LogTag.i("BaseFragment onViewCreate");
         super.onViewCreated(view, savedInstanceState);
-        viewModel = getViewModel();
         subscribeUi();
     }
 
@@ -60,6 +63,12 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
                 ((ParameterizedType) Objects.requireNonNull(this.getClass().getGenericSuperclass()))
                         .getActualTypeArguments();
         return new ViewModelProvider(this).get((Class<T>) types[0]);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        disposables.dispose();
     }
 }
 
