@@ -9,17 +9,25 @@
         android:id="@+id/mainFragment"
         android:name="com.example.native_new.android.androidbasejava.ui.main.MainFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment" >
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_fragmentDetail"
             app:destination="@id/fragmentDetail"
             app:enterAnim="@anim/slide_in_from_right"
-            app:popExitAnim="@anim/slide_out_to_right"
-
             app:exitAnim="@anim/slide_out_to_left"
+
             app:popEnterAnim="@anim/slide_in_from_left"
-            />
-<!--        app:exitAnim="@anim/slide_out_to_right"-->
+            app:popExitAnim="@anim/slide_out_to_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentSettings"
+            app:destination="@id/fragmentSettings"
+
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+        <!--        app:exitAnim="@anim/slide_out_to_right"-->
         <!--            -->
         <!--            -->
     </fragment>
@@ -28,4 +36,8 @@
         android:name="com.example.native_new.android.androidbasejava.ui.detail.FragmentDetail"
         android:label="fragment_detail_fragment"
         tools:layout="@layout/detail_fragment" />
+    <fragment
+        android:id="@+id/fragmentSettings"
+        android:name="com.example.native_new.android.androidbasejava.ui.settings.AppSettings"
+        android:label="fragment_app_settings" />
 </navigation>
