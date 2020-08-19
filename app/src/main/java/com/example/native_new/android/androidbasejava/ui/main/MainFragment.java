@@ -5,8 +5,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.native_new.android.androidbasejava.R;
@@ -36,12 +34,12 @@ public class MainFragment extends BaseFragment<MainViewModel, MainFragmentBindin
 
     @Override
     protected void onInitView(View root) {
-        binding.gotoDetail.setOnClickListener(v -> {
-            NavDirections action =
-                    MainFragmentDirections
-                            .actionMainFragmentToFragmentDetail();
-            Navigation.findNavController(v).navigate(action);
-        });
+//        binding.gotoDetail.setOnClickListener(v -> {
+//            NavDirections action =
+//                    MainFragmentDirections
+//                            .actionMainFragmentToFragmentDetail();
+//            Navigation.findNavController(v).navigate(action);
+//        });
 
         setupRecyl();
     }

@@ -1,14 +1,13 @@
 package com.example.native_new.android.androidbasejava.ui.main.pagedbook;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.example.native_new.android.androidbasejava.R;
+import com.example.native_new.android.androidbasejava.databinding.ListItemBinding;
 import com.example.native_new.android.androidbasejava.db.model.Books;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,14 +37,14 @@ public class AdapterBooks extends PagedListAdapter<Books, VHBooks> {
     @NonNull
     @Override
     public VHBooks onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent,
-                false);
-        return new VHBooks(v);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ListItemBinding binding = ListItemBinding.inflate(layoutInflater, parent, false);
+        return new VHBooks(binding);
     }
 
     @Override
     public int getItemCount() {
-        if(getCurrentList()!=null){
+        if (getCurrentList() != null) {
             return getCurrentList().size();
         }
         return super.getItemCount();
@@ -57,9 +56,9 @@ public class AdapterBooks extends PagedListAdapter<Books, VHBooks> {
         if (item != null) {
             holder.bindData(item);
         }
-            // Null defines a placeholder item - PagedListAdapter automatically
-            // invalidates this row when the actual object is loaded from the
-            // database.
-            // -- check holder.clear()
+        // Null defines a placeholder item - PagedListAdapter automatically
+        // invalidates this row when the actual object is loaded from the
+        // database.
+        // -- check holder.clear()
     }
 }
