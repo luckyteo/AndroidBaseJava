@@ -1,6 +1,6 @@
 package com.example.native_new.android.androidbasejava.api;
 
-import com.example.native_new.android.androidbasejava.model.Books;
+import com.example.native_new.android.androidbasejava.db.model.Books;
 
 import java.util.List;
 
