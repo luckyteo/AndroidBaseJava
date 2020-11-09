@@ -34,13 +34,6 @@ public class MainFragment extends BaseFragment<MainViewModel, MainFragmentBindin
 
     @Override
     protected void onInitView(View root) {
-//        binding.gotoDetail.setOnClickListener(v -> {
-//            NavDirections action =
-//                    MainFragmentDirections
-//                            .actionMainFragmentToFragmentDetail();
-//            Navigation.findNavController(v).navigate(action);
-//        });
-
         setupRecyl();
     }
 

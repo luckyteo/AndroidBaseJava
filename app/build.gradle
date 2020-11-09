@@ -110,4 +110,11 @@ dependencies {
 
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
 
+    //util
+    implementation("com.google.guava:guava:30.0-android")
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
 }

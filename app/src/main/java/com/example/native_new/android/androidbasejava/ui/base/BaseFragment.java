@@ -41,7 +41,6 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-//        LogTag.i("BaseFragment onCreateView");
         View root = inflater.inflate(getResourceLayoutId(), container, false);
         binding = DataBindingUtil.bind(root);
         onInitView(root);
@@ -50,7 +49,6 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        LogTag.i("BaseFragment onViewCreate");
         super.onViewCreated(view, savedInstanceState);
         subscribeUi();
     }

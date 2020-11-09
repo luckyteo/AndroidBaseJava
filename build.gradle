@@ -28,7 +28,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-ext {
-    hilt_version = '2.28-alpha'
-}
