@@ -6,6 +6,7 @@ import androidx.room.Room;
 
 import com.example.native_new.android.androidbasejava.db.AppDB;
 import com.example.native_new.android.androidbasejava.db.BooksDao;
+import com.example.native_new.android.androidbasejava.db.TasksDao;
 
 import javax.inject.Singleton;
 
@@ -23,8 +24,8 @@ public class DataBaseModule {
 
     @Provides
     @Singleton
-    public static AppDB providePokemonDB(Application application) {
-        return Room.databaseBuilder(application, AppDB.class, "HQ.sqlite")
+    public static AppDB provideDB(Application application) {
+        return Room.databaseBuilder(application, AppDB.class, AppDB.DB_NAME)
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
@@ -34,5 +35,11 @@ public class DataBaseModule {
     @Singleton
     public static BooksDao provideBooksDao(AppDB appDB) {
         return appDB.getBooksDao();
+    }
+
+    @Provides
+    @Singleton
+    public static TasksDao provideTasksDao(AppDB appDB) {
+        return appDB.getTasksDao();
     }
 }

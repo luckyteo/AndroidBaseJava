@@ -5,9 +5,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 @Entity(tableName = "tasks")
 public class TasksEntity {
-    @PrimaryKey(autoGenerate = true)
+
+    @ColumnInfo(name = "_id")
+    @PrimaryKey
+    @NonNull
     private String id;
 
     @ColumnInfo(name = "title")
@@ -18,6 +23,11 @@ public class TasksEntity {
 
     @ColumnInfo(name = "completed")
     private boolean completed;
+
+    public TasksEntity(@NotNull String id) {
+        //nothing
+        this.id = id;
+    }
 
     @NonNull
     public String getId() {
