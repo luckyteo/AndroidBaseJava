@@ -17,6 +17,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Objects;
 
+import es.dmoral.toasty.Toasty;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBinding> extends Fragment {
@@ -67,6 +68,18 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
     public void onDestroy() {
         super.onDestroy();
         disposables.dispose();
+    }
+
+    public void toast(String msg) {
+        Toasty.normal(getContext(), msg).show();
+    }
+
+    public void toastError(String msg) {
+        Toasty.error(getContext(), msg).show();
+    }
+
+    public void toastSuccess(String msg) {
+        Toasty.success(getContext(), msg).show();
     }
 }
 

@@ -1,6 +1,6 @@
 package com.example.native_new.android.androidbasejava.mvibase;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 /**
  * Object that will subscribes to a {@link MviView}'s {@link MviIntent}s,

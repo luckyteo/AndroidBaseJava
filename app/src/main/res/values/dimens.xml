@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="activity_horizontal_margin" type="dimen">@dimen/_8sdp</item>
+
     <item name="list_item_padding" type="dimen">@dimen/_5sdp</item>
     <item name="activity_vertical_margin" type="dimen">@dimen/_8sdp</item>
 
