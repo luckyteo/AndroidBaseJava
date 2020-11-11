@@ -4,6 +4,7 @@ import com.example.native_new.android.androidbasejava.model.Task;
 import com.example.native_new.android.androidbasejava.mvibase.MviIntent;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 interface TasksIntent extends MviIntent {
 
@@ -18,6 +19,7 @@ interface TasksIntent extends MviIntent {
     }
 
     @AllArgsConstructor
+    @Getter
     class RefreshIntent implements TasksIntent {
         private final boolean forceUpdate;
 
@@ -27,6 +29,7 @@ interface TasksIntent extends MviIntent {
     }
 
     @AllArgsConstructor
+    @Getter
     class ActivateTaskIntent implements TasksIntent {
         private final Task task;
 
@@ -36,6 +39,7 @@ interface TasksIntent extends MviIntent {
     }
 
     @AllArgsConstructor
+    @Getter
     class CompleteTaskIntent implements TasksIntent {
         private final Task task;
 
@@ -55,6 +59,7 @@ interface TasksIntent extends MviIntent {
     }
 
     @AllArgsConstructor
+    @Getter
     class ChangeFilterIntent implements TasksIntent {
         private final TasksFilterType filterType;
 

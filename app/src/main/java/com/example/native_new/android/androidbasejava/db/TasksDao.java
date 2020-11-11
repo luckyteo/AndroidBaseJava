@@ -15,7 +15,7 @@ import java.util.List;
 public interface TasksDao {
 
     @Query("SELECT * FROM tasks")
-    public List<TasksEntity> getTasks();
+    List<TasksEntity> getTasks();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTaskEntity(List<TasksEntity> tasksEntities);

@@ -6,12 +6,13 @@ import com.example.native_new.android.androidbasejava.db.TasksDao;
 import com.example.native_new.android.androidbasejava.db.model.TasksEntity;
 import com.example.native_new.android.androidbasejava.model.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
 
 public class TaskRepository implements TaskDataSource{
 
@@ -24,8 +25,18 @@ public class TaskRepository implements TaskDataSource{
     }
 
     @Override
-    public List<TasksEntity> getTasks() {
-        return tasksDao.getTasks();
+    public Single<List<Task>> getTasks() {
+        List<TasksEntity> tasks = tasksDao.getTasks();
+        return Single.just(tasks).flatMap(tasksEntities -> {
+            List<Task> lists = new ArrayList<>();
+            for (TasksEntity entity :
+                    tasksEntities) {
+                Task task = new Task(entity.getTitle(), entity.getDescription(), entity.getId(),
+                        entity.isCompleted());
+                lists.add(task);
+            }
+            return Single.just(lists);
+        });
     }
 
     @Override

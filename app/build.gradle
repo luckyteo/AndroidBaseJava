@@ -78,6 +78,10 @@ dependencies {
     //RxJava
     def rxJavaVer = '3.0.7'
     implementation "io.reactivex.rxjava3:rxjava:${rxJavaVer}"
+    //RxBinding
+    def rxBindingVer = "4.0.0"
+    implementation "com.jakewharton.rxbinding4:rxbinding-core:${rxBindingVer}"
+    implementation "com.jakewharton.rxbinding4:rxbinding-swiperefreshlayout:${rxBindingVer}"
 
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
@@ -89,7 +93,6 @@ dependencies {
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-rxjava2:$room_version"
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'

@@ -2,17 +2,21 @@ package com.example.native_new.android.androidbasejava.repository.todos.tasks;
 
 import androidx.annotation.NonNull;
 
-import com.example.native_new.android.androidbasejava.db.model.TasksEntity;
 import com.example.native_new.android.androidbasejava.model.Task;
 
 import java.util.List;
 
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
+
 
 public interface TaskDataSource {
+    default Single<List<Task>> getTasks(boolean forceUpdate) {
+        if (forceUpdate) refreshTasks();
+        return getTasks();
+    }
 
-    List<TasksEntity> getTasks();
+    Single<List<Task>> getTasks();
 
     Single<Task> getTask(@NonNull String taskId);
 

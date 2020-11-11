@@ -33,7 +33,6 @@ public class MainViewModel extends ViewModel {
                 .subscribe(
                         this::processInsertBook,
                         throwable -> LogTag.i("get book error => %s", throwable.getMessage()));
-
     }
 
     private void processInsertBook(List<Books> books) {

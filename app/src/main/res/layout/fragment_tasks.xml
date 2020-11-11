@@ -3,6 +3,7 @@
 
 
     <com.example.native_new.android.androidbasejava.ui.base.ScrollChildSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

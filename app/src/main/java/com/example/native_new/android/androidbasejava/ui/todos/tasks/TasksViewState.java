@@ -10,9 +10,11 @@ import java.util.Collections;
 import java.util.List;
 
 import lombok.Builder;
+import lombok.Getter;
 
 
 @Builder
+@Getter
 public class TasksViewState implements MviViewState {
     private final boolean isLoading;
     private final TasksFilterType tasksFilterType;

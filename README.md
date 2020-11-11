@@ -11,3 +11,7 @@
 - Paging 2 library
 - Databinding
 - Livedata
+
+ Base MVI
+
+ - Room entities and domain models, should they be separate?

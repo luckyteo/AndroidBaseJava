@@ -11,9 +11,11 @@ import com.example.native_new.android.androidbasejava.utils.UiNotificationStatus
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 interface TasksResult extends MviResult {
     @AllArgsConstructor
+    @Getter
     class LoadTasks implements TasksResult {
         @NonNull
         private final LceStatus status;
@@ -44,6 +46,7 @@ interface TasksResult extends MviResult {
     }
 
     @AllArgsConstructor
+    @Getter
     class ActivateTaskResult implements TasksResult {
         @NonNull
         private final LceStatus status;
@@ -79,6 +82,7 @@ interface TasksResult extends MviResult {
     }
 
     @AllArgsConstructor
+    @Getter
     class CompleteTaskResult implements TasksResult {
         @NonNull
         private final LceStatus status;
@@ -114,6 +118,7 @@ interface TasksResult extends MviResult {
     }
 
     @AllArgsConstructor
+    @Getter
     class ClearCompletedTasksResult implements TasksResult {
         @NonNull
         private final LceStatus status;
