@@ -25,7 +25,7 @@ public class AddEditTaskViewModel extends ViewModel implements MviViewModel<AddE
     private PublishSubject<AddEditTaskIntent> mIntentsSubject;
     private Observable<AddEditTaskViewState> mStateObservable;
 
-    private CompositeDisposable mDisposable = new CompositeDisposable();
+    private CompositeDisposable mDisposables = new CompositeDisposable();
     private AddEditTaskActionProcessorHolder mActionProcessorHolder;
 
     @ViewModelInject
@@ -38,7 +38,7 @@ public class AddEditTaskViewModel extends ViewModel implements MviViewModel<AddE
 
     @Override
     public void processIntents(Observable<AddEditTaskIntent> intents) {
-
+        mDisposables.add(intents.subscribe(mIntentsSubject::onNext));
     }
 
     @Override
@@ -75,7 +75,7 @@ public class AddEditTaskViewModel extends ViewModel implements MviViewModel<AddE
      * take only the first ever InitialIntent and all intents of other types
      * to avoid reloading data on config changes
      */
-    private ObservableTransformer<AddEditTaskIntent, AddEditTaskIntent> intentFilter =
+    private final ObservableTransformer<AddEditTaskIntent, AddEditTaskIntent> intentFilter =
             intents -> intents.publish(shared ->
                     Observable.merge(
                             shared.ofType(AddEditTaskIntent.InitialIntent.class).take(1),
@@ -114,7 +114,7 @@ public class AddEditTaskViewModel extends ViewModel implements MviViewModel<AddE
 
     @Override
     protected void onCleared() {
-        mDisposable.dispose();
+        mDisposables.dispose();
     }
 
     /**
@@ -124,7 +124,7 @@ public class AddEditTaskViewModel extends ViewModel implements MviViewModel<AddE
      * creates a new {@link MviViewState} by only updating the related fields.
      * This is basically like a big switch statement of all possible types for the {@link MviResult}
      */
-    private static BiFunction<AddEditTaskViewState, AddEditTaskResult, AddEditTaskViewState> reducer =
+    private static final BiFunction<AddEditTaskViewState, AddEditTaskResult, AddEditTaskViewState> reducer =
             (previousState, result) -> {
                 AddEditTaskViewState.AddEditTaskViewStateBuilder stateBuilder = previousState.getBuilderWith();
                 if (result instanceof AddEditTaskResult.PopulateTask) {

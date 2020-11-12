@@ -1,6 +1,7 @@
 package com.example.native_new.android.androidbasejava.db.mapper;
 
 import com.example.native_new.android.androidbasejava.db.model.TasksEntity;
+import com.example.native_new.android.androidbasejava.db.model.TasksEntityBuilder;
 import com.example.native_new.android.androidbasejava.model.Task;
 
 public class TaskMapper {
@@ -14,10 +15,10 @@ public class TaskMapper {
     }
 
     public static TasksEntity toEntity(Task model) {
-        return TasksEntity.builder()
-                .id(model.getId())
-                .title(model.getTitle())
-                .description(model.getDescription())
+        return TasksEntityBuilder.aTasksEntity()
+                .withId(model.getId())
+                .withTitle(model.getTitle())
+                .withDescription(model.getDescription())
                 .build();
     }
 }
