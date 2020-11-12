@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Builder;
+
+@Builder
 @Entity(tableName = "tasks")
 public class TasksEntity {
 
@@ -24,6 +27,9 @@ public class TasksEntity {
     @ColumnInfo(name = "completed")
     private boolean completed;
 
+    public TasksEntity(){
+        //nothing
+    }
     public TasksEntity(@NotNull String id) {
         //nothing
         this.id = id;

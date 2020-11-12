@@ -10,9 +10,21 @@
         android:name="com.example.native_new.android.androidbasejava.ui.todos.tasks.TaskFragment"
         android:label="tasks_fragment"
         tools:layout="@layout/fragment_tasks">
+        <action
+            android:id="@+id/action_tasks_to_add_task"
+            app:destination="@id/addTaskFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.native_new.android.androidbasejava.ui.todos.addedittask.AddEditTaskFragment"
+        android:label="add_edit_task_fragment"
+        tools:layout="@layout/addtask_frag">
 
     </fragment>
 
+    <!--======================================================-->
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.native_new.android.androidbasejava.ui.main.MainFragment"

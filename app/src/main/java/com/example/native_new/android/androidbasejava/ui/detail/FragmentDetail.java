@@ -29,6 +29,11 @@ public class FragmentDetail extends BaseFragment<FragmentDetailViewModel, Detail
         model.getMessage().observe(getViewLifecycleOwner(), this::updateMessage);
     }
 
+    @Override
+    protected String tag() {
+        return FragmentDetail.class.getSimpleName();
+    }
+
     private void updateMessage(String msg) {
         binding.message.setText(msg);
     }

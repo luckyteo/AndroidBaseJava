@@ -32,6 +32,8 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
 
     protected abstract void subscribeUi();
 
+    protected abstract String tag();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -4,6 +4,7 @@ import timber.log.Timber;
 
 public class LogTag {
     private static final int STACK_TRACE_LEVELS_UP = 5;
+    public static final String TAG = "taint";
 
     private LogTag() {
         // private constructor
@@ -14,7 +15,7 @@ public class LogTag {
         Timber.i(sss, args);
     }
 
-    public static void i(String tag, String message, Object... args) {
+    public static void itag(String tag, String message, Object... args) {
         String sss = getClassNameMethodNameAndLineNumber() + message;
         Timber.tag(tag).i(sss, args);
     }

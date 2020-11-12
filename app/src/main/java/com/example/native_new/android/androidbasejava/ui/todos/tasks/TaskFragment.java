@@ -5,6 +5,10 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.MutableLiveData;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.native_new.android.androidbasejava.R;
 import com.example.native_new.android.androidbasejava.databinding.FragmentTasksBinding;
@@ -13,10 +17,13 @@ import com.example.native_new.android.androidbasejava.mvibase.MviView;
 import com.example.native_new.android.androidbasejava.mvibase.MviViewModel;
 import com.example.native_new.android.androidbasejava.mvibase.MviViewState;
 import com.example.native_new.android.androidbasejava.ui.base.BaseFragment;
+import com.example.native_new.android.androidbasejava.utils.logs.LogTag;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding4.swiperefreshlayout.RxSwipeRefreshLayout;
+import com.jakewharton.rxbinding4.view.RxView;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.core.Observable;
@@ -57,6 +64,12 @@ public class TaskFragment extends BaseFragment<TasksViewModel, FragmentTasksBind
 //        fab.setImageResource(R.drawable.ic_add);
 //        fab.setOnClickListener(ignored -> showAddTask());
 
+        disposables.add(RxView.clicks(binding.tasksContainer)
+                .throttleFirst(300, TimeUnit.MILLISECONDS)
+                .subscribe(unit -> {
+                    showAddTask();
+                }));
+
         // Set up progress indicator
         binding.refreshLayout.setColorSchemeColors(
                 ContextCompat.getColor(getContext(), R.color.colorPrimary),
@@ -71,6 +84,13 @@ public class TaskFragment extends BaseFragment<TasksViewModel, FragmentTasksBind
     @Override
     protected void subscribeUi() {
         bind();
+
+        subscribeFragmentResult();
+    }
+
+    @Override
+    protected String tag() {
+        return TaskFragment.class.getSimpleName();
     }
 
     @Override
@@ -135,11 +155,18 @@ public class TaskFragment extends BaseFragment<TasksViewModel, FragmentTasksBind
         mRefreshIntentPublisher.onNext(TasksIntent.RefreshIntent.create(false));
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        disposables.dispose();
+    private void subscribeFragmentResult() {
+        NavController navController = NavHostFragment.findNavController(this);
+        // We use a String here, but any type that can be put in a Bundle is supported
+        MutableLiveData<String> liveData = navController.getCurrentBackStackEntry()
+                .getSavedStateHandle()
+                .getLiveData("addTask");
+        liveData.observe(getViewLifecycleOwner(), s -> {
+            // Do something with the result.
+            LogTag.itag(LogTag.TAG, String.format("Result here %s", s));
+        });
     }
+
 
     /**
      * Connect the {@link MviView} with the {@link MviViewModel}
@@ -241,8 +268,9 @@ public class TaskFragment extends BaseFragment<TasksViewModel, FragmentTasksBind
     }
 
     private void showAddTask() {
-//        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
-//        startActivityForResult(intent, AddEditTaskActivity.REQUEST_ADD_TASK);
+        NavController navController = NavHostFragment.findNavController(this);
+        NavDirections directions = TaskFragmentDirections.actionTasksToAddTask();
+        navController.navigate(directions);
     }
 
     private void showLoadingTasksError() {

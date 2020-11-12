@@ -43,6 +43,11 @@ public class MainFragment extends BaseFragment<MainViewModel, MainFragmentBindin
         viewModel.getStateListBooks().observe(getViewLifecycleOwner(), books -> adapterBooks.submitList(books));
     }
 
+    @Override
+    protected String tag() {
+        return MainFragment.class.getSimpleName();
+    }
+
     private void setupRecyl() {
         binding.recyl.hasFixedSize();
         binding.recyl.setLayoutManager(new LinearLayoutManager(getContext(),

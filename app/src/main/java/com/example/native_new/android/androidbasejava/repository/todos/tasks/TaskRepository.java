@@ -3,6 +3,7 @@ package com.example.native_new.android.androidbasejava.repository.todos.tasks;
 import androidx.annotation.NonNull;
 
 import com.example.native_new.android.androidbasejava.db.TasksDao;
+import com.example.native_new.android.androidbasejava.db.mapper.TaskMapper;
 import com.example.native_new.android.androidbasejava.db.model.TasksEntity;
 import com.example.native_new.android.androidbasejava.model.Task;
 
@@ -46,7 +47,8 @@ public class TaskRepository implements TaskDataSource{
 
     @Override
     public Completable saveTask(@NonNull Task task) {
-        return null;
+        tasksDao.insertTaskEntity(TaskMapper.toEntity(task));
+        return Completable.complete();
     }
 
     @Override
