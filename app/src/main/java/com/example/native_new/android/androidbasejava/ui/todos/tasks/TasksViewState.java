@@ -39,5 +39,9 @@ public class TasksViewState implements MviViewState {
                 .completedTasksCleared(false)
                 .build();
     }
+
+    public TasksViewStateBuilder getBuildWith() {
+        return buildWith;
+    }
 }
 

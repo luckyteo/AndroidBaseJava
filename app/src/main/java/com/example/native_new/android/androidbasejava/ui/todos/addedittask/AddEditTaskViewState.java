@@ -14,7 +14,6 @@ public class AddEditTaskViewState implements MviViewState {
     private final String description;
     private final boolean isEmpty;
     private final boolean isSaved;
-
     private final Throwable error;
 
     private final AddEditTaskViewStateBuilder builderWith;
@@ -29,4 +28,12 @@ public class AddEditTaskViewState implements MviViewState {
                 .build();
     }
 
+    public AddEditTaskViewStateBuilder getBuilderWith() {
+        return new AddEditTaskViewStateBuilder()
+                .title(title)
+                .description(description)
+                .isEmpty(isEmpty)
+                .isSaved(isSaved)
+                .error(error);
+    }
 }

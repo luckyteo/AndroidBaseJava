@@ -17,6 +17,7 @@ import com.example.native_new.android.androidbasejava.mvibase.MviView;
 import com.example.native_new.android.androidbasejava.mvibase.MviViewModel;
 import com.example.native_new.android.androidbasejava.mvibase.MviViewState;
 import com.example.native_new.android.androidbasejava.ui.base.BaseFragment;
+import com.example.native_new.android.androidbasejava.utils.Constants;
 import com.example.native_new.android.androidbasejava.utils.logs.LogTag;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding4.swiperefreshlayout.RxSwipeRefreshLayout;
@@ -59,12 +60,8 @@ public class TaskFragment extends BaseFragment<TasksViewModel, FragmentTasksBind
         binding.tasksList.setAdapter(mListAdapter);
 
 //        // Set up floating action button
-//        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_add_task);
-//
-//        fab.setImageResource(R.drawable.ic_add);
-//        fab.setOnClickListener(ignored -> showAddTask());
 
-        disposables.add(RxView.clicks(binding.tasksContainer)
+        disposables.add(RxView.clicks(binding.btnAddTask)
                 .throttleFirst(300, TimeUnit.MILLISECONDS)
                 .subscribe(unit -> {
                     showAddTask();
@@ -146,24 +143,20 @@ public class TaskFragment extends BaseFragment<TasksViewModel, FragmentTasksBind
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // conflicting with the initial intent but needed when coming back from the
-        // AddEditTask activity to refresh the list.
-        mRefreshIntentPublisher.onNext(TasksIntent.RefreshIntent.create(false));
-    }
-
     private void subscribeFragmentResult() {
         NavController navController = NavHostFragment.findNavController(this);
         // We use a String here, but any type that can be put in a Bundle is supported
-        MutableLiveData<String> liveData = navController.getCurrentBackStackEntry()
+        MutableLiveData<Boolean> liveData = navController.getCurrentBackStackEntry()
                 .getSavedStateHandle()
-                .getLiveData("addTask");
-        liveData.observe(getViewLifecycleOwner(), s -> {
+                .getLiveData(Constants.BUNDLE_REFRESH);
+        liveData.observe(getViewLifecycleOwner(), isRefresh -> {
             // Do something with the result.
-            LogTag.itag(LogTag.TAG, String.format("Result here %s", s));
+            LogTag.itag(LogTag.TAG, String.format("Result here %s", isRefresh));
+            if (Boolean.TRUE.equals(isRefresh)) {
+                // conflicting with the initial intent but needed when coming back from the
+                // AddEditTask activity to refresh the list.
+                mRefreshIntentPublisher.onNext(TasksIntent.RefreshIntent.create(false));
+            }
         });
     }
 

@@ -1,13 +1,16 @@
 package com.example.native_new.android.androidbasejava.ui.todos.addedittask;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.native_new.android.androidbasejava.R;
 import com.example.native_new.android.androidbasejava.databinding.AddtaskFragBinding;
 import com.example.native_new.android.androidbasejava.mvibase.MviView;
 import com.example.native_new.android.androidbasejava.ui.base.BaseFragment;
+import com.example.native_new.android.androidbasejava.utils.Constants;
 import com.example.native_new.android.androidbasejava.utils.logs.LogTag;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding4.view.RxView;
@@ -64,7 +67,7 @@ public class AddEditTaskFragment extends BaseFragment<AddEditTaskViewModel, Addt
     @Override
     public void render(AddEditTaskViewState state) {
         if (state.isSaved()) {
-            showTasksList();
+            backToTasksList();
             return;
         }
         if (state.isEmpty()) {
@@ -107,9 +110,10 @@ public class AddEditTaskFragment extends BaseFragment<AddEditTaskViewModel, Addt
         Snackbar.make(binding.addTaskTitle, getString(R.string.empty_task_message), Snackbar.LENGTH_LONG).show();
     }
 
-    private void showTasksList() {
-        getActivity().setResult(Activity.RESULT_OK);
-        getActivity().finish();
+    private void backToTasksList() {
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.getPreviousBackStackEntry().getSavedStateHandle().set(Constants.BUNDLE_REFRESH, true);
+        navController.popBackStack();
     }
 
     private void setTitle(String title) {

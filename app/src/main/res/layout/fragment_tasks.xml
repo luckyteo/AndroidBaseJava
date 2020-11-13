@@ -1,74 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <com.example.native_new.android.androidbasejava.ui.base.ScrollChildSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.example.native_new.android.androidbasejava.ui.base.ScrollChildSwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/tasksContainer"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:orientation="vertical">
+            android:fitsSystemWindows="true"
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/tasksLL"
+            <RelativeLayout
+                android:id="@+id/tasksContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/filteringLabel"
+                <LinearLayout
+                    android:id="@+id/tasksLL"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/filteringLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/list_item_padding"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/list_item_padding"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <ListView
+                        android:id="@+id/tasks_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/noTasks"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/list_item_padding"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/list_item_padding"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:gravity="center_vertical"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
 
-                <ListView
-                    android:id="@+id/tasks_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/noTasksIcon"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_assignment_turned_in_24dp" />
 
-            <LinearLayout
-                android:id="@+id/noTasks"
+                    <TextView
+                        android:id="@+id/noTasksMain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/list_item_padding"
+                        android:text="@string/no_tasks_all" />
+
+                    <TextView
+                        android:id="@+id/noTasksAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/touch_feedback"
+                        android:gravity="center"
+                        android:text="@string/no_tasks_add" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAddTask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical">
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/_10sdp"
+                android:contentDescription="Add Task"
+                app:fabSize="auto"
+                app:srcCompat="@drawable/ic_baseline_add_24" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-                <ImageView
-                    android:id="@+id/noTasksIcon"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_assignment_turned_in_24dp" />
-
-                <TextView
-                    android:id="@+id/noTasksMain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="@dimen/list_item_padding"
-                    android:text="@string/no_tasks_all" />
-
-                <TextView
-                    android:id="@+id/noTasksAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/touch_feedback"
-                    android:gravity="center"
-                    android:text="@string/no_tasks_add" />
-
-            </LinearLayout>
-        </RelativeLayout>
     </com.example.native_new.android.androidbasejava.ui.base.ScrollChildSwipeRefreshLayout>
 </layout>
