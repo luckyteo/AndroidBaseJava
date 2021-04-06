@@ -7,7 +7,6 @@ import androidx.paging.PagedList;
 
 import com.example.native_new.android.androidbasejava.db.model.Books;
 import com.example.native_new.android.androidbasejava.repository.Repository;
-import com.example.native_new.android.androidbasejava.utils.logs.LogTag;
 
 import java.util.List;
 
@@ -16,6 +15,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import timber.log.Timber;
 
 @HiltViewModel
 public class MainViewModel extends ViewModel {
@@ -35,7 +35,7 @@ public class MainViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                         this::processInsertBook,
-                        throwable -> LogTag.i("get book error => %s", throwable.getMessage()));
+                        throwable -> Timber.i("get book error => %s", throwable.getMessage()));
 
     }
 
