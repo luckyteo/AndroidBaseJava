@@ -19,10 +19,10 @@ import java.util.Objects;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
-public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBinding> extends Fragment {
+public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBinding> extends Fragment {
     public final CompositeDisposable disposables = new CompositeDisposable();
-    protected E binding;
-    protected T viewModel;
+    protected B binding;
+    protected V viewModel;
 
 
     protected abstract int getResourceLayoutId();
@@ -41,7 +41,6 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-//        LogTag.i("BaseFragment onCreateView");
         View root = inflater.inflate(getResourceLayoutId(), container, false);
         binding = DataBindingUtil.bind(root);
         onInitView(root);
@@ -50,7 +49,6 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        LogTag.i("BaseFragment onViewCreate");
         super.onViewCreated(view, savedInstanceState);
         subscribeUi();
     }
@@ -58,11 +56,11 @@ public abstract class BaseFragment<T extends ViewModel, E extends ViewDataBindin
     /**
      * @return view model instance
      */
-    private T getViewModel() {
+    private V getViewModel() {
         final Type[] types =
                 ((ParameterizedType) Objects.requireNonNull(this.getClass().getGenericSuperclass()))
                         .getActualTypeArguments();
-        return new ViewModelProvider(this).get((Class<T>) types[0]);
+        return new ViewModelProvider(this).get((Class<V>) types[0]);
     }
 
     @Override

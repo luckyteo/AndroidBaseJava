@@ -1,9 +1,9 @@
-package com.example.native_new.android.androidbasejava.db;
+package com.example.native_new.android.androidbasejava.data.db;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-import com.example.native_new.android.androidbasejava.db.model.Books;
+import com.example.native_new.android.androidbasejava.data.db.entities.Books;
 
 @Database(entities = {Books.class}, version = 1, exportSchema = false)
 public abstract class AppDB extends RoomDatabase {

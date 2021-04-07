@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.example.native_new.android.androidbasejava.db.model.Books;
+import com.example.native_new.android.androidbasejava.data.db.entities.Books;
 import com.example.native_new.android.androidbasejava.repository.Repository;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import timber.log.Timber;
 public class MainViewModel extends ViewModel {
 
     public LiveData<PagedList<Books>> stateListBooks;
-    private Repository repository;
+    private final Repository repository;
 
 
     @Inject

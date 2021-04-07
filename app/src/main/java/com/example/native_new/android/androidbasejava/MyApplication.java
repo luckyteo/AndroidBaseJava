@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.multidex.MultiDexApplication;
 
 import com.example.native_new.android.androidbasejava.crashreport.FakeCrashLibrary;
-import com.example.native_new.android.androidbasejava.utils.logs.DebugTree;
+import com.example.native_new.android.androidbasejava.utils.logs.AppDebugTree;
 
 import dagger.hilt.android.HiltAndroidApp;
 import timber.log.Timber;
@@ -25,7 +25,7 @@ public class MyApplication extends MultiDexApplication {
         super.onCreate(); // Injection happens in super.onCreate()
         setsInstance(this);
         if (BuildConfig.DEBUG) {
-            Timber.plant(new DebugTree());
+            Timber.plant(new AppDebugTree());
         } else {
             Timber.plant(new CrashReportingTree());
         }

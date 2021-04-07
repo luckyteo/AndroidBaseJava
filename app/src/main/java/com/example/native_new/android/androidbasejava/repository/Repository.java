@@ -2,9 +2,9 @@ package com.example.native_new.android.androidbasejava.repository;
 
 import androidx.paging.DataSource;
 
-import com.example.native_new.android.androidbasejava.api.ApiService;
-import com.example.native_new.android.androidbasejava.db.BooksDao;
-import com.example.native_new.android.androidbasejava.db.model.Books;
+import com.example.native_new.android.androidbasejava.data.api.ApiService;
+import com.example.native_new.android.androidbasejava.data.db.BooksDao;
+import com.example.native_new.android.androidbasejava.data.db.entities.Books;
 
 import java.util.List;
 
@@ -27,11 +27,11 @@ public class Repository {
         return apiService.getBooks();
     }
 
-    public void insertBook(List<Books> books){
+    public void insertBook(List<Books> books) {
         booksDao.insertBooks(books);
     }
 
-    public DataSource.Factory<Integer, Books> getBooks(){
-       return  booksDao.getAllBooks();
+    public DataSource.Factory<Integer, Books> getBooks() {
+        return booksDao.getAllBooks();
     }
 }

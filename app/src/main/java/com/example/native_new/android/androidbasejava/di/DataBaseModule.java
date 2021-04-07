@@ -4,8 +4,8 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import com.example.native_new.android.androidbasejava.db.AppDB;
-import com.example.native_new.android.androidbasejava.db.BooksDao;
+import com.example.native_new.android.androidbasejava.data.db.AppDB;
+import com.example.native_new.android.androidbasejava.data.db.BooksDao;
 import com.example.native_new.android.androidbasejava.utils.Constants;
 
 import javax.inject.Singleton;
