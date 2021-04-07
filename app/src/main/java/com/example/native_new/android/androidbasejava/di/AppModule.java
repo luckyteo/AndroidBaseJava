@@ -1,5 +1,8 @@
 package com.example.native_new.android.androidbasejava.di;
 
+import android.app.Application;
+
+import com.example.native_new.android.androidbasejava.data.AppPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -18,5 +21,11 @@ public class AppModule {
     @Provides
     public static Gson provideGson() {
         return new GsonBuilder().setLenient().create();
+    }
+
+    @Provides
+    @Singleton
+    public AppPreferences providesSharedPreferences(Application application) {
+        return new AppPreferences(application);
     }
 }

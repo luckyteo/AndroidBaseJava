@@ -21,13 +21,14 @@ import timber.log.Timber;
 public class MainViewModel extends ViewModel {
 
     public LiveData<PagedList<Books>> stateListBooks;
-    private final Repository repository;
+
+    @Inject
+    Repository repository;
 
 
     @Inject
-    public MainViewModel(Repository repository) {
-
-        this.repository = repository;
+    public MainViewModel() {
+        //nothing
     }
 
     public Disposable getBooks() {
