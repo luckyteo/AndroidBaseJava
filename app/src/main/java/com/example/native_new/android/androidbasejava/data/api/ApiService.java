@@ -4,10 +4,10 @@ import com.example.native_new.android.androidbasejava.data.db.entities.Books;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
 
 public interface ApiService {
     @GET("book")
-    Observable<List<Books>> getBooks();
+    Single<List<Books>> getBooks();
 }

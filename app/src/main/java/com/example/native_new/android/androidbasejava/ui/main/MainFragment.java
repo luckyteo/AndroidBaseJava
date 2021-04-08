@@ -1,9 +1,7 @@
 package com.example.native_new.android.androidbasejava.ui.main;
 
-import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.native_new.android.androidbasejava.R;
@@ -30,16 +28,10 @@ public class MainFragment extends BaseFragment<MainViewModel, MainFragmentBindin
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        disposables.add(viewModel.getBooks());
-    }
-
-    @Override
     protected void onInitView(View root) {
         setupRecyl();
         pref.setToken("data");
-        Timber.i("Token here %s",pref.getToken());
+        Timber.i("Token here %s", pref.getToken());
     }
 
     @Override
@@ -51,8 +43,7 @@ public class MainFragment extends BaseFragment<MainViewModel, MainFragmentBindin
     private void setupRecyl() {
         binding.recyl.hasFixedSize();
         binding.recyl.setLayoutManager(new LinearLayoutManager(getContext(),
-                LinearLayoutManager.VERTICAL,
-                false));
+                LinearLayoutManager.VERTICAL, false));
         if (adapterBooks == null) {
             adapterBooks = new AdapterBooks();
         }

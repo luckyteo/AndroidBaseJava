@@ -27,7 +27,7 @@ public class AppPreferences {
         editor.apply();
     }
 
-    public String getToken(){
+    public String getToken() {
         return preferences.getString("key", "");
     }
 }

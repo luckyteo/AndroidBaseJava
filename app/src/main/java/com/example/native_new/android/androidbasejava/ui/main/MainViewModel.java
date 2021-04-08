@@ -1,52 +1,41 @@
 package com.example.native_new.android.androidbasejava.ui.main;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
-import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.example.native_new.android.androidbasejava.data.db.entities.Books;
-import com.example.native_new.android.androidbasejava.repository.Repository;
-
-import java.util.List;
+import com.example.native_new.android.androidbasejava.ui.base.BaseViewModel;
+import com.example.native_new.android.androidbasejava.usercase.GetBooksUC;
+import com.example.native_new.android.androidbasejava.usercase.RequestBooksUC;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import timber.log.Timber;
+import lombok.Getter;
 
 @HiltViewModel
-public class MainViewModel extends ViewModel {
+public class MainViewModel extends BaseViewModel {
 
-    public LiveData<PagedList<Books>> stateListBooks;
+    RequestBooksUC requestBooksUC;
+    GetBooksUC getBooksUC;
+
+    @Getter
+    LiveData<PagedList<Books>> stateListBooks;
 
     @Inject
-    Repository repository;
-
-
-    @Inject
-    public MainViewModel() {
+    public MainViewModel(RequestBooksUC requestBooksUC,
+                         GetBooksUC getBooksUC) {
+        this.requestBooksUC = requestBooksUC;
+        this.getBooksUC = getBooksUC;
         //nothing
+        generateListBooks();
+        addDispose(requestBooksUC.execute());
     }
 
-    public Disposable getBooks() {
-        return repository.getRemoteBooks()
-                .subscribeOn(Schedulers.io())
-                .subscribe(
-                        this::processInsertBook,
-                        throwable -> Timber.i("get book error => %s", throwable.getMessage()));
 
-    }
-
-    private void processInsertBook(List<Books> books) {
-        repository.insertBook(books);
-    }
-
-    public LiveData<PagedList<Books>> getStateListBooks() {
-        stateListBooks = new LivePagedListBuilder<>(repository.getBooks(), /* page size */ 50)
-                .build();
-        return stateListBooks;
+    private void generateListBooks() {
+        if (stateListBooks == null) {
+            stateListBooks = getBooksUC.execute();
+        }
     }
 }
