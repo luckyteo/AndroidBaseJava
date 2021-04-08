@@ -9,6 +9,7 @@ import com.example.native_new.android.androidbasejava.data.db.entities.Books;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.rxjava3.core.Observable;
 
@@ -18,6 +19,7 @@ public class Repository {
     @Inject
     ApiService apiService;
 
+    @Singleton
     @Inject
     public Repository() {
         // nothing impl
