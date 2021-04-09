@@ -1,8 +1,6 @@
 package com.example.native_new.android.androidbasejava.usercase;
 
-import androidx.lifecycle.LiveData;
-import androidx.paging.LivePagedListBuilder;
-import androidx.paging.PagedList;
+import androidx.paging.DataSource;
 
 import com.example.native_new.android.androidbasejava.data.db.entities.Books;
 import com.example.native_new.android.androidbasejava.repository.Repository;
@@ -20,8 +18,7 @@ public class GetBooksUC {
         //nothing
     }
 
-    public LiveData<PagedList<Books>> execute() {
-        return new LivePagedListBuilder<>(repository.getBooks(), /* page size */ 50)
-                .build();
+    public DataSource.Factory<Integer, Books> execute() {
+        return repository.getBooks();
     }
 }

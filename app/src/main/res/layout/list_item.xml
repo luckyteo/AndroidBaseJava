@@ -32,9 +32,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/pokemonImage"
                 android:text="@{item.name}"
-
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:textColor="@android:color/black" />
         </RelativeLayout>
 
 

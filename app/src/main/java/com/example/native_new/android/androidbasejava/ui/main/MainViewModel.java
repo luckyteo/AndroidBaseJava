@@ -1,6 +1,7 @@
 package com.example.native_new.android.androidbasejava.ui.main;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.example.native_new.android.androidbasejava.data.db.entities.Books;
@@ -35,7 +36,8 @@ public class MainViewModel extends BaseViewModel {
 
     private void generateListBooks() {
         if (stateListBooks == null) {
-            stateListBooks = getBooksUC.execute();
+            stateListBooks = (LiveData<PagedList<Books>>) new LivePagedListBuilder(getBooksUC.execute(), /* page size */ 50)
+                    .build();
         }
     }
 }

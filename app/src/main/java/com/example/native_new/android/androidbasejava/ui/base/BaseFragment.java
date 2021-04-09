@@ -17,10 +17,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Objects;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-
 public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBinding> extends Fragment {
-    public final CompositeDisposable disposables = new CompositeDisposable();
     protected B binding;
     protected V viewModel;
 
@@ -61,12 +58,6 @@ public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBindin
                 ((ParameterizedType) Objects.requireNonNull(this.getClass().getGenericSuperclass()))
                         .getActualTypeArguments();
         return new ViewModelProvider(this).get((Class<V>) types[0]);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        disposables.dispose();
     }
 }
 

@@ -1,37 +1,10 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="main.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
-<!--    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">-->
-<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-<!--        <item name="colorAccent">@color/colorAccent</item>-->
-<!--    </style>-->
-
-    <!-- App theme without action bar -->
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.RED" parent="AppTheme.NoActionBar">
-        <item name="colorPrimary">@color/primaryColorRed</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColorRed</item>
-        <item name="colorAccent">@color/secondaryColorRed</item>
-    </style>
-    <style name="AppTheme.PINK" parent="AppTheme.NoActionBar">
-        <item name="colorPrimary">@color/primaryColorPink</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColorPink</item>
-        <item name="colorAccent">@color/secondaryColorPink</item>
+        <item name="android:fontFamily">@font/family_roboto</item>
     </style>
 </resources>
