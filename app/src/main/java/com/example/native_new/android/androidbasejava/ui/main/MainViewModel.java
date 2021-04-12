@@ -36,7 +36,7 @@ public class MainViewModel extends BaseViewModel {
 
     private void generateListBooks() {
         if (stateListBooks == null) {
-            stateListBooks = (LiveData<PagedList<Books>>) new LivePagedListBuilder(getBooksUC.execute(), /* page size */ 50)
+            stateListBooks = new LivePagedListBuilder<>(getBooksUC.execute(), /* page size */ 50)
                     .build();
         }
     }

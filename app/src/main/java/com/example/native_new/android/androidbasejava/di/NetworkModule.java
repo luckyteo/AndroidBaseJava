@@ -3,6 +3,7 @@ package com.example.native_new.android.androidbasejava.di;
 import com.example.native_new.android.androidbasejava.BuildConfig;
 import com.example.native_new.android.androidbasejava.data.api.ApiService;
 import com.example.native_new.android.androidbasejava.data.api.ApiServiceWithAuth;
+import com.example.native_new.android.androidbasejava.data.api.AuthApiService;
 import com.example.native_new.android.androidbasejava.utils.Constants;
 
 import java.lang.annotation.Retention;
@@ -39,10 +40,8 @@ public class NetworkModule {
         // nothing
     }
 
-    @BaseOkHttpClient
     @Provides
-    @Singleton
-    public static OkHttpClient getClient() {
+    public static OkHttpClient.Builder getClient() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         if (BuildConfig.DEBUG) {
             loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
@@ -50,43 +49,30 @@ public class NetworkModule {
             loggingInterceptor.level(HttpLoggingInterceptor.Level.NONE);
         }
         return new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build();
-    }
-
-    @AuthInterceptorOkHttpClient
-    @Provides
-    @Singleton
-    public static OkHttpClient getClientWithAuth() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        if (BuildConfig.DEBUG) {
-            loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
-        } else {
-            loggingInterceptor.level(HttpLoggingInterceptor.Level.NONE);
-        }
-
-        // add interceptor auth
-        return new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build();
+                .addInterceptor(loggingInterceptor);
     }
 
     @Provides
-    @Singleton
-    public static ApiService apiService(@BaseOkHttpClient OkHttpClient client) {
+    public static Retrofit retrofitBuild(OkHttpClient.Builder client) {
         return new Retrofit.Builder()
-                .client(client)
+                .client(client.build())
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build()
+                .build();
+    }
 
-                .create(ApiService.class);
+    @Provides
+    @Singleton
+    public static ApiService apiService(Retrofit retrofit) {
+        return retrofit.create(ApiService.class);
     }
 
     @Provides
     @Singleton
     public static ApiServiceWithAuth apiServiceWithAuth(@AuthInterceptorOkHttpClient OkHttpClient client) {
+
+        //add interceptor JWT
         return new Retrofit.Builder()
                 .client(client)
                 .baseUrl(Constants.BASE_URL)
@@ -95,5 +81,20 @@ public class NetworkModule {
                 .build()
 
                 .create(ApiServiceWithAuth.class);
+    }
+
+    @Provides
+    @Singleton
+    public static AuthApiService authApiService(@AuthInterceptorOkHttpClient OkHttpClient client) {
+
+        //add interceptor JWT
+        return new Retrofit.Builder()
+                .client(client)
+                .baseUrl(Constants.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build()
+
+                .create(AuthApiService.class);
     }
 }
