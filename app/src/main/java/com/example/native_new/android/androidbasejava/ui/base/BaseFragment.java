@@ -1,5 +1,6 @@
 package com.example.native_new.android.androidbasejava.ui.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.native_new.android.androidbasejava.ui.MainActions;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Objects;
@@ -20,6 +25,7 @@ import java.util.Objects;
 public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBinding> extends Fragment {
     protected B binding;
     protected V viewModel;
+    protected MainActions mainActions;
 
 
     protected abstract int getResourceLayoutId();
@@ -27,6 +33,14 @@ public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBindin
     protected abstract void onInitView(View root);
 
     protected abstract void subscribeUi();
+
+    protected abstract boolean isHideBackButton();
+
+    @Override
+    public void onAttach(@NotNull Context context) {
+        super.onAttach(context);
+        mainActions = (MainActions) context;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +62,7 @@ public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBindin
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         subscribeUi();
+        setupToolbar();
     }
 
     /**
@@ -58,6 +73,13 @@ public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBindin
                 ((ParameterizedType) Objects.requireNonNull(this.getClass().getGenericSuperclass()))
                         .getActualTypeArguments();
         return new ViewModelProvider(this).get((Class<V>) types[0]);
+    }
+
+    protected void setupToolbar() {
+        mainActions.showToolBar();
+        if (!isHideBackButton()) {
+            mainActions.showBackButton();
+        }
     }
 }
 

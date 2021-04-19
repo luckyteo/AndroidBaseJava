@@ -23,4 +23,9 @@ public class FragmentDetail extends BaseFragment<FragmentDetailViewModel, Detail
     protected void subscribeUi() {
         //nothing
     }
+
+    @Override
+    protected boolean isHideBackButton() {
+        return false;
+    }
 }
