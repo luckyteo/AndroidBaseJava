@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.example.native_new.android.androidbasejava.data.db.entities.Books;
+import com.example.native_new.android.androidbasejava.data.models.Books;
 import com.example.native_new.android.androidbasejava.databinding.ListItemBinding;
 
 import org.jetbrains.annotations.NotNull;

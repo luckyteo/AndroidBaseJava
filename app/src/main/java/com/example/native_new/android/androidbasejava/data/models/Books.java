@@ -1,4 +1,4 @@
-package com.example.native_new.android.androidbasejava.data.db.entities;
+package com.example.native_new.android.androidbasejava.data.models;
 
 import android.os.Build;
 

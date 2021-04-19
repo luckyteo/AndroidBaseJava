@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.example.native_new.android.androidbasejava.data.db.entities.Books;
+import com.example.native_new.android.androidbasejava.data.models.Books;
 import com.example.native_new.android.androidbasejava.ui.base.BaseViewModel;
-import com.example.native_new.android.androidbasejava.usercase.GetBooksUC;
-import com.example.native_new.android.androidbasejava.usercase.RequestBooksUC;
+import com.example.native_new.android.androidbasejava.usecase.GetBooksUC;
+import com.example.native_new.android.androidbasejava.usecase.RequestBooksUC;
 
 import javax.inject.Inject;
 

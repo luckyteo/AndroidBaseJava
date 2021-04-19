@@ -1,6 +1,6 @@
-package com.example.native_new.android.androidbasejava.usercase;
+package com.example.native_new.android.androidbasejava.usecase;
 
-import com.example.native_new.android.androidbasejava.data.db.entities.Books;
+import com.example.native_new.android.androidbasejava.data.models.Books;
 import com.example.native_new.android.androidbasejava.repository.Repository;
 
 import java.util.List;

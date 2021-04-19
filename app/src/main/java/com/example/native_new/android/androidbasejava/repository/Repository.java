@@ -4,7 +4,7 @@ import androidx.paging.DataSource;
 
 import com.example.native_new.android.androidbasejava.data.api.ApiService;
 import com.example.native_new.android.androidbasejava.data.db.BooksDao;
-import com.example.native_new.android.androidbasejava.data.db.entities.Books;
+import com.example.native_new.android.androidbasejava.data.models.Books;
 
 import java.util.List;
 

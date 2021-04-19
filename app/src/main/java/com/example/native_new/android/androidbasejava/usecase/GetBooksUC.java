@@ -1,8 +1,8 @@
-package com.example.native_new.android.androidbasejava.usercase;
+package com.example.native_new.android.androidbasejava.usecase;
 
 import androidx.paging.DataSource;
 
-import com.example.native_new.android.androidbasejava.data.db.entities.Books;
+import com.example.native_new.android.androidbasejava.data.models.Books;
 import com.example.native_new.android.androidbasejava.repository.Repository;
 
 import javax.inject.Inject;

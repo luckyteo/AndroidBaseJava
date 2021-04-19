@@ -3,7 +3,7 @@ package com.example.native_new.android.androidbasejava.ui.main.pagedbook;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.native_new.android.androidbasejava.data.db.entities.Books;
+import com.example.native_new.android.androidbasejava.data.models.Books;
 import com.example.native_new.android.androidbasejava.databinding.ListItemBinding;
 
 public class VHBooks extends RecyclerView.ViewHolder {
