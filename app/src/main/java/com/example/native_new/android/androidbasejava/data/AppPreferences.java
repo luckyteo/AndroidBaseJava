@@ -15,9 +15,7 @@ public class AppPreferences {
     }
 
     public AppPreferences(Context context) {
-//        preferences       =   PreferenceManager.getDefaultSharedPreferences(context);
         preferences = context.getSharedPreferences(context.getString(R.string.app_name), MODE_PRIVATE);
-        //edit = preferences.edit();
     }
 
 

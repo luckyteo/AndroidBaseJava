@@ -1,15 +1,14 @@
 package com.example.native_new.android.androidbasejava.di;
 
+import android.app.Application;
+
 import com.example.native_new.android.androidbasejava.BuildConfig;
+import com.example.native_new.android.androidbasejava.data.api.ApiAuth;
 import com.example.native_new.android.androidbasejava.data.api.ApiService;
-import com.example.native_new.android.androidbasejava.data.api.ApiServiceWithAuth;
-import com.example.native_new.android.androidbasejava.data.api.AuthApiService;
+import com.example.native_new.android.androidbasejava.data.api.AuthInterceptor;
+import com.example.native_new.android.androidbasejava.data.api.ConnectivityInterceptor;
 import com.example.native_new.android.androidbasejava.utils.Constants;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-import javax.inject.Qualifier;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -26,33 +25,37 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(SingletonComponent.class)
 public class NetworkModule {
 
-    @Qualifier
-    @Retention(RetentionPolicy.RUNTIME)
-    private @interface AuthInterceptorOkHttpClient {
-    }
-
-    @Qualifier
-    @Retention(RetentionPolicy.RUNTIME)
-    private @interface BaseOkHttpClient {
-    }
-
     private NetworkModule() {
         // nothing
     }
 
+    ////////////////////////
+    // CREATE CLIENT     //
+    //////////////////////
     @Provides
-    public static OkHttpClient.Builder getClient() {
+    @Singleton
+    public static OkHttpClient.Builder getClient(Application application) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         if (BuildConfig.DEBUG) {
             loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
         } else {
             loggingInterceptor.level(HttpLoggingInterceptor.Level.NONE);
         }
+
+        AuthInterceptor authInterceptor = new AuthInterceptor();
+        ConnectivityInterceptor connectivityInterceptor = new ConnectivityInterceptor(application);
+
         return new OkHttpClient.Builder()
+                .addInterceptor(authInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .addInterceptor(loggingInterceptor);
     }
 
+    ////////////////////////
+    // CREATE RETROFIT   //
+    //////////////////////
     @Provides
+    @Singleton
     public static Retrofit retrofitBuild(OkHttpClient.Builder client) {
         return new Retrofit.Builder()
                 .client(client.build())
@@ -62,6 +65,9 @@ public class NetworkModule {
                 .build();
     }
 
+    ////////////////////////
+    // CREATE API SERVICE//
+    //////////////////////
     @Provides
     @Singleton
     public static ApiService apiService(Retrofit retrofit) {
@@ -70,31 +76,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public static ApiServiceWithAuth apiServiceWithAuth(@AuthInterceptorOkHttpClient OkHttpClient client) {
-
-        //add interceptor JWT
-        return new Retrofit.Builder()
-                .client(client)
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build()
-
-                .create(ApiServiceWithAuth.class);
-    }
-
-    @Provides
-    @Singleton
-    public static AuthApiService authApiService(@AuthInterceptorOkHttpClient OkHttpClient client) {
-
-        //add interceptor JWT
-        return new Retrofit.Builder()
-                .client(client)
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build()
-
-                .create(AuthApiService.class);
+    public static ApiAuth apiAuth(Retrofit builder) {
+        return builder.create(ApiAuth.class);
     }
 }
