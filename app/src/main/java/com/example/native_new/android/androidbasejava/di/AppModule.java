@@ -17,8 +17,8 @@ import dagger.hilt.components.SingletonComponent;
 @InstallIn(SingletonComponent.class)
 public class AppModule {
 
-    @Singleton
     @Provides
+    @Singleton
     public static Gson provideGson() {
         return new GsonBuilder().setLenient().create();
     }
