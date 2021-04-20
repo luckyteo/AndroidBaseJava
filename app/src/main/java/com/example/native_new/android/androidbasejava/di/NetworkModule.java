@@ -34,7 +34,7 @@ public class NetworkModule {
     //////////////////////
     @Provides
     @Singleton
-    public static OkHttpClient.Builder getClient(Application application) {
+    public static OkHttpClient getClient(Application application) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         if (BuildConfig.DEBUG) {
             loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
@@ -48,7 +48,8 @@ public class NetworkModule {
         return new OkHttpClient.Builder()
                 .addInterceptor(authInterceptor)
                 .addInterceptor(connectivityInterceptor)
-                .addInterceptor(loggingInterceptor);
+                .addInterceptor(loggingInterceptor)
+                .build();
     }
 
     ////////////////////////
@@ -56,9 +57,9 @@ public class NetworkModule {
     //////////////////////
     @Provides
     @Singleton
-    public static Retrofit retrofitBuild(OkHttpClient.Builder client) {
+    public static Retrofit retrofitBuild(OkHttpClient client) {
         return new Retrofit.Builder()
-                .client(client.build())
+                .client(client)
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
