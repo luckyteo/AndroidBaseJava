@@ -1,7 +1,7 @@
 package com.example.native_new.android.androidbasejava.ui.detail;
 
-import androidx.lifecycle.ViewModel;
+import com.example.native_new.android.androidbasejava.ui.base.BaseViewModel;
 
-public class FragmentDetailViewModel extends ViewModel {
+public class FragmentDetailViewModel extends BaseViewModel {
     // Implement the ViewModel
 }
