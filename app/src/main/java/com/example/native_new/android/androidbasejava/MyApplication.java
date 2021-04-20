@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.multidex.MultiDexApplication;
 
 import com.example.native_new.android.androidbasejava.crashreport.FakeCrashLibrary;
+import com.example.native_new.android.androidbasejava.utils.logs.AppDebugTree;
 
 import dagger.hilt.android.HiltAndroidApp;
 import timber.log.Timber;
@@ -13,25 +14,14 @@ import timber.log.Timber;
 @HiltAndroidApp
 public class MyApplication extends MultiDexApplication {
 
-    private static MyApplication sInstance = null;
-
-    public static MyApplication getInstance() {
-        return sInstance;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate(); // Injection happens in super.onCreate()
-        setsInstance(this);
         if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
+            Timber.plant(new AppDebugTree());
         } else {
             Timber.plant(new CrashReportingTree());
         }
-    }
-
-    public static void setsInstance(MyApplication sInstance) {
-        MyApplication.sInstance = sInstance;
     }
 
     /**

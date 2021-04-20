@@ -1,4 +1,4 @@
-package com.example.native_new.android.androidbasejava.db.model;
+package com.example.native_new.android.androidbasejava.data.models;
 
 import android.os.Build;
 
@@ -7,6 +7,8 @@ import androidx.annotation.RequiresApi;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -26,14 +28,14 @@ public class Books {
     private String createAt;
 
     public Books() {
-        id = null;
+        id = "";
     }
 
-    public String getId() {
+    public @NotNull String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NotNull String id) {
         this.id = id;
     }
 

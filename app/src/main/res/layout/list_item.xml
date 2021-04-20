@@ -2,39 +2,39 @@
 <layout>
 
     <data>
+
         <variable
             name="item"
-            type="com.example.native_new.android.androidbasejava.db.model.Books" />
+            type="com.example.native_new.android.androidbasejava.data.models.Books" />
     </data>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
-        <ImageView
-            android:id="@+id/pokemonImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            android:background="@color/colorPrimary"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/pokemonName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@id/pokemonImage"
-            android:textStyle="bold"
+            <ImageView
+                android:id="@+id/pokemonImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                android:background="@color/colorPrimary" />
 
-            android:textColor="@android:color/black"
-            android:text="@{item.name}"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/pokemonName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/pokemonImage"
+                android:text="@{item.name}"
+                android:textColor="@android:color/black" />
+        </RelativeLayout>
 
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </layout>

@@ -1,4 +1,4 @@
-package com.example.native_new.android.androidbasejava.db;
+package com.example.native_new.android.androidbasejava.data.db;
 
 import androidx.paging.DataSource;
 import androidx.room.Dao;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.native_new.android.androidbasejava.db.model.Books;
+import com.example.native_new.android.androidbasejava.data.models.Books;
 
 import java.util.List;
 

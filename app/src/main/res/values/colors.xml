@@ -3,4 +3,11 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="themeDeselected">#d69b9b9b</color>
+    <color name="themeSelected">#e300aaff</color>
+    <color name="seperator">#7ca6a6a6</color>
+
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_normal">#000000</color>
 </resources>

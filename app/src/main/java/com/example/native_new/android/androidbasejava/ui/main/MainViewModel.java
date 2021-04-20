@@ -1,48 +1,43 @@
 package com.example.native_new.android.androidbasejava.ui.main;
 
-import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.example.native_new.android.androidbasejava.db.model.Books;
-import com.example.native_new.android.androidbasejava.repository.Repository;
-import com.example.native_new.android.androidbasejava.utils.logs.LogTag;
+import com.example.native_new.android.androidbasejava.data.models.Books;
+import com.example.native_new.android.androidbasejava.ui.base.BaseViewModel;
+import com.example.native_new.android.androidbasejava.usecase.GetBooksUC;
+import com.example.native_new.android.androidbasejava.usecase.RequestBooksUC;
 
-import java.util.List;
+import javax.inject.Inject;
 
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import dagger.hilt.android.lifecycle.HiltViewModel;
+import lombok.Getter;
 
-public class MainViewModel extends ViewModel {
+@HiltViewModel
+public class MainViewModel extends BaseViewModel {
 
-    public LiveData<PagedList<Books>> stateListBooks;
-    private Repository repository;
+    RequestBooksUC requestBooksUC;
+    GetBooksUC getBooksUC;
 
+    @Getter
+    LiveData<PagedList<Books>> stateListBooks;
 
-    @ViewModelInject
-    public MainViewModel(Repository repository) {
-
-        this.repository = repository;
+    @Inject
+    public MainViewModel(RequestBooksUC requestBooksUC,
+                         GetBooksUC getBooksUC) {
+        this.requestBooksUC = requestBooksUC;
+        this.getBooksUC = getBooksUC;
+        //nothing
+        generateListBooks();
+        addDispose(requestBooksUC.execute());
     }
 
-    public Disposable getBooks() {
-        return repository.getRemoteBooks()
-                .subscribeOn(Schedulers.io())
-                .subscribe(
-                        this::processInsertBook,
-                        throwable -> LogTag.i("get book error => %s", throwable.getMessage()));
 
-    }
-
-    private void processInsertBook(List<Books> books) {
-        repository.insertBook(books);
-    }
-
-    public LiveData<PagedList<Books>> getStateListBooks() {
-        stateListBooks = new LivePagedListBuilder<>(repository.getBooks(), /* page size */ 50)
-                .build();
-        return stateListBooks;
+    private void generateListBooks() {
+        if (stateListBooks == null) {
+            stateListBooks = new LivePagedListBuilder<>(getBooksUC.execute(), /* page size */ 50)
+                    .build();
+        }
     }
 }
