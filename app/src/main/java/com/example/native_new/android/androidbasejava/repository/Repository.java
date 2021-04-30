@@ -2,6 +2,7 @@ package com.example.native_new.android.androidbasejava.repository;
 
 import androidx.paging.DataSource;
 
+import com.example.native_new.android.androidbasejava.data.api.ApiAuth;
 import com.example.native_new.android.androidbasejava.data.api.ApiService;
 import com.example.native_new.android.androidbasejava.data.db.BooksDao;
 import com.example.native_new.android.androidbasejava.data.models.Books;
