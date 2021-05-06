@@ -8,6 +8,7 @@ import com.example.native_new.android.androidbasejava.data.api.ApiService;
 import com.example.native_new.android.androidbasejava.data.api.AuthInterceptor;
 import com.example.native_new.android.androidbasejava.data.api.ConnectivityInterceptor;
 import com.example.native_new.android.androidbasejava.utils.Constants;
+import com.example.native_new.android.androidbasejava.utils.UnsafeOkHttpClient;
 
 import javax.inject.Singleton;
 
@@ -45,8 +46,8 @@ public class NetworkModule {
         AuthInterceptor authInterceptor = new AuthInterceptor();
         ConnectivityInterceptor connectivityInterceptor = new ConnectivityInterceptor(application);
 
-        return new OkHttpClient.Builder()
-                .addInterceptor(authInterceptor)
+        OkHttpClient.Builder builder = UnsafeOkHttpClient.getUnsafeOkHttpClient();
+        return builder.addInterceptor(authInterceptor)
                 .addInterceptor(connectivityInterceptor)
                 .addInterceptor(loggingInterceptor)
                 .build();
