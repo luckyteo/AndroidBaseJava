@@ -12,15 +12,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.native_new.android.androidbasejava.ui.MainActions;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Objects;
+import com.example.native_new.android.androidbasejava.utils.ViewModelUtil;
 
 public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBinding> extends Fragment {
     protected B binding;
@@ -37,7 +31,7 @@ public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBindin
     protected abstract boolean isHideBackButton();
 
     @Override
-    public void onAttach(@NotNull Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mainActions = (MainActions) context;
     }
@@ -45,7 +39,7 @@ public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBindin
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = getViewModel();
+        viewModel = ViewModelUtil.getViewModel(this);
     }
 
     @Nullable
@@ -63,16 +57,6 @@ public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBindin
         super.onViewCreated(view, savedInstanceState);
         subscribeUi();
         setupToolbar();
-    }
-
-    /**
-     * @return view model instance
-     */
-    private V getViewModel() {
-        final Type[] types =
-                ((ParameterizedType) Objects.requireNonNull(this.getClass().getGenericSuperclass()))
-                        .getActualTypeArguments();
-        return new ViewModelProvider(this).get((Class<V>) types[0]);
     }
 
     protected void setupToolbar() {

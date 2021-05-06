@@ -55,7 +55,7 @@ dependencies {
     // hilt
     implementation "com.google.dagger:hilt-android:2.33-beta"
     annotationProcessor "com.google.dagger:hilt-android-compiler:2.33-beta"
-//    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
 //    annotationProcessor 'androidx.hilt:hilt-compiler:1.0.0-beta01'
 
     def multidex_version = "2.0.1"
@@ -85,7 +85,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata:2.3.1'
 
     // Room
-    def room_version = "2.2.6"
+    def room_version = "2.3.0"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
@@ -96,7 +96,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     //Paging library
-    def paging_version = "2.1.2"
+    def paging_version = "3.0.0"
     implementation "androidx.paging:paging-runtime:$paging_version"
     // For Kotlin use paging-runtime-ktx
     implementation "androidx.recyclerview:recyclerview:1.2.0"
